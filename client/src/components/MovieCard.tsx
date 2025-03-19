@@ -51,8 +51,8 @@ export default function MovieCard({ id, title, posterPath, rating, year }: Movie
     : '/placeholder-poster.svg';
 
   return (
-    <Link href={`/movie/${id}`}>
-      <div className="movie-card group relative rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 cursor-pointer">
+    <div className="movie-card group relative rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 cursor-pointer">
+      <Link href={`/movie/${id}`} className="block">
         <img 
           src={posterUrl} 
           alt={title}
@@ -72,8 +72,8 @@ export default function MovieCard({ id, title, posterPath, rating, year }: Movie
             </button>
           </div>
         </div>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 }
 

@@ -10,6 +10,7 @@ import FavoritesPage from "@/pages/favorites";
 import DiscoverPage from "@/pages/discover";
 import { AuthContext, useAuthProvider } from "@/hooks/useAuth";
 import { FavoritesContext, useFavoritesProvider } from "@/hooks/useFavorites";
+import { ReactNode } from "react";
 
 function Footer() {
   return (

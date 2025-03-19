@@ -1,8 +1,8 @@
 import { useState, useEffect, createContext, useContext } from "react";
-import { apiRequest } from "@/lib/queryClient";
+import { apiRequest, queryClient } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/hooks/useAuth";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 interface FavoriteMovie {
   movieId: number;
@@ -28,7 +28,6 @@ export const FavoritesContext = createContext<FavoritesContextType>({
 export function useFavoritesProvider() {
   const { isAuthenticated } = useAuth();
   const { toast } = useToast();
-  const queryClient = useQueryClient();
   const [localFavorites, setLocalFavorites] = useState<FavoriteMovie[]>([]);
 
   // Load local favorites from localStorage on mount
@@ -56,8 +55,8 @@ export function useFavoritesProvider() {
   });
 
   // Combine local and server favorites
-  const favorites = isAuthenticated 
-    ? serverFavorites.map((fav: any) => ({
+  const favorites = isAuthenticated && serverFavorites 
+    ? (serverFavorites as any[]).map((fav) => ({
         movieId: fav.movieId,
         title: fav.title,
         posterPath: fav.posterPath,
@@ -117,7 +116,7 @@ export function useFavoritesProvider() {
         setLocalFavorites(prev => prev.filter(movie => movie.movieId !== movieId));
       }
       
-      const movieTitle = favorites.find(f => f.movieId === movieId)?.title || "Movie";
+      const movieTitle = favorites.find((f: FavoriteMovie) => f.movieId === movieId)?.title || "Movie";
       toast({
         title: "Removed from favorites",
         description: `${movieTitle} has been removed from your favorites`,

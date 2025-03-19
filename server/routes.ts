@@ -7,10 +7,16 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import axios from "axios";
 
-// JWT Secret from environment variables
-const JWT_SECRET = process.env.JWT_SECRET || "super_secret_jwt_key";
+// Configuration from environment variables
+const JWT_SECRET = process.env.JWT_SECRET || "local_development_jwt_secret_key_change_in_production";
+const JWT_EXPIRY = process.env.JWT_EXPIRY || "7d";
 const TMDB_API_KEY = process.env.TMDB_API_KEY;
 const TMDB_BASE_URL = "https://api.themoviedb.org/3";
+
+// Check if TMDB API key is available
+if (!TMDB_API_KEY) {
+  console.warn("Warning: TMDB_API_KEY environment variable is not set. Movie API requests will fail.");
+}
 
 // Middleware to verify JWT token
 const authenticateToken = (req: Request, res: Response, next: Function) => {
@@ -60,7 +66,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const token = jwt.sign(
         { id: user.id, username: user.username },
         JWT_SECRET,
-        { expiresIn: "7d" }
+        { expiresIn: JWT_EXPIRY }
       );
 
       // Return user data and token
@@ -100,7 +106,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const token = jwt.sign(
         { id: user.id, username: user.username },
         JWT_SECRET,
-        { expiresIn: "7d" }
+        { expiresIn: JWT_EXPIRY }
       );
 
       // Return user data and token

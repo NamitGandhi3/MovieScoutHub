@@ -1,6 +1,7 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
-import { setupVite, serveStatic, log } from "./vite";
+import { setupVite, log } from "./vite";
+import { setupStaticServer } from "./static-server";
 import path from "path";
 import { fileURLToPath } from "url";
 import dotenv from "dotenv";
@@ -60,10 +61,16 @@ app.use((req, res, next) => {
   // importantly only setup vite in development and after
   // setting up all the other routes so the catch-all route
   // doesn't interfere with the other routes
-  if (app.get("env") === "development") {
+  
+  // For Replit environment or when NODE_ENV is not explicitly set to production,
+  // run in development mode with Vite
+  const isProduction = process.env.NODE_ENV === "production";
+  
+  if (!isProduction) {
     await setupVite(app, server);
   } else {
-    serveStatic(app);
+    // In production, serve static files from the build directory
+    setupStaticServer(app);
   }
 
   // Get port from environment variable or use default

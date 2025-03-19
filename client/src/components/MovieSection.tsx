@@ -21,8 +21,8 @@ export default function MovieSection({
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold">{title}</h2>
         {viewAllLink && (
-          <Link href={viewAllLink}>
-            <a className="text-primary hover:underline">View All</a>
+          <Link href={viewAllLink} className="text-primary hover:underline">
+            View All
           </Link>
         )}
       </div>

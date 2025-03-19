@@ -62,29 +62,21 @@ export default function Navbar() {
     <nav className="bg-white dark:bg-neutral-800 shadow-md py-4 px-4 sm:px-6 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         {/* Logo */}
-        <Link href="/">
-          <a className="flex items-center space-x-2">
-            <Film className="h-8 w-8 text-primary" />
-            <span className="text-xl font-bold">MovieExplorer</span>
-          </a>
+        <Link href="/" className="flex items-center space-x-2">
+          <Film className="h-8 w-8 text-primary" />
+          <span className="text-xl font-bold">MovieExplorer</span>
         </Link>
 
         {/* Center Nav Links - visible on medium screens and up */}
         <div className="hidden md:flex items-center space-x-6">
-          <Link href="/">
-            <a className={`text-gray-700 dark:text-gray-200 hover:text-primary dark:hover:text-primary transition duration-200 ${location === "/" ? "text-primary" : ""}`}>
-              Home
-            </a>
+          <Link href="/" className={`text-gray-700 dark:text-gray-200 hover:text-primary dark:hover:text-primary transition duration-200 ${location === "/" ? "text-primary" : ""}`}>
+            Home
           </Link>
-          <Link href="/discover">
-            <a className={`text-gray-700 dark:text-gray-200 hover:text-primary dark:hover:text-primary transition duration-200 ${location === "/discover" ? "text-primary" : ""}`}>
-              Discover
-            </a>
+          <Link href="/discover" className={`text-gray-700 dark:text-gray-200 hover:text-primary dark:hover:text-primary transition duration-200 ${location === "/discover" ? "text-primary" : ""}`}>
+            Discover
           </Link>
-          <Link href="/favorites">
-            <a className={`text-gray-700 dark:text-gray-200 hover:text-primary dark:hover:text-primary transition duration-200 ${location === "/favorites" ? "text-primary" : ""}`}>
-              My Favorites
-            </a>
+          <Link href="/favorites" className={`text-gray-700 dark:text-gray-200 hover:text-primary dark:hover:text-primary transition duration-200 ${location === "/favorites" ? "text-primary" : ""}`}>
+            My Favorites
           </Link>
         </div>
 

@@ -1,6 +1,4 @@
-import { Switch, Route } from "wouter";
-import { queryClient } from "./lib/queryClient";
-import { QueryClientProvider } from "@tanstack/react-query";
+import { Switch, Route, Link } from "wouter";
 import { Toaster } from "@/components/ui/toaster";
 import NotFound from "@/pages/not-found";
 import Navbar from "@/components/Navbar";
@@ -31,16 +29,16 @@ function Footer() {
             <div>
               <h3 className="text-sm font-semibold mb-3">Navigation</h3>
               <ul className="space-y-2 text-sm">
-                <li><a href="/" className="text-gray-600 dark:text-gray-400 hover:text-primary">Home</a></li>
-                <li><a href="/discover" className="text-gray-600 dark:text-gray-400 hover:text-primary">Discover</a></li>
-                <li><a href="/favorites" className="text-gray-600 dark:text-gray-400 hover:text-primary">My Favorites</a></li>
+                <li><Link href="/" className="text-gray-600 dark:text-gray-400 hover:text-primary">Home</Link></li>
+                <li><Link href="/discover" className="text-gray-600 dark:text-gray-400 hover:text-primary">Discover</Link></li>
+                <li><Link href="/favorites" className="text-gray-600 dark:text-gray-400 hover:text-primary">My Favorites</Link></li>
               </ul>
             </div>
             <div>
               <h3 className="text-sm font-semibold mb-3">Categories</h3>
               <ul className="space-y-2 text-sm">
-                <li><a href="/discover?category=popular" className="text-gray-600 dark:text-gray-400 hover:text-primary">Popular</a></li>
-                <li><a href="/discover?category=top_rated" className="text-gray-600 dark:text-gray-400 hover:text-primary">Top Rated</a></li>
+                <li><Link href="/discover?category=popular" className="text-gray-600 dark:text-gray-400 hover:text-primary">Popular</Link></li>
+                <li><Link href="/discover?category=top_rated" className="text-gray-600 dark:text-gray-400 hover:text-primary">Top Rated</Link></li>
               </ul>
             </div>
             <div>
@@ -91,16 +89,14 @@ function App() {
   const favoritesProviderValue = useFavoritesProvider();
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <AuthContext.Provider value={authProviderValue}>
-        <FavoritesContext.Provider value={favoritesProviderValue}>
-          <Layout>
-            <Router />
-          </Layout>
-          <Toaster />
-        </FavoritesContext.Provider>
-      </AuthContext.Provider>
-    </QueryClientProvider>
+    <AuthContext.Provider value={authProviderValue}>
+      <FavoritesContext.Provider value={favoritesProviderValue}>
+        <Layout>
+          <Router />
+        </Layout>
+        <Toaster />
+      </FavoritesContext.Provider>
+    </AuthContext.Provider>
   );
 }
 

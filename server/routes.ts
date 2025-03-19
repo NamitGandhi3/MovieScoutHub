@@ -7,9 +7,9 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import axios from "axios";
 
-// JWT Secret (would be in env vars in production)
+// JWT Secret from environment variables
 const JWT_SECRET = process.env.JWT_SECRET || "super_secret_jwt_key";
-const TMDB_API_KEY = process.env.TMDB_API_KEY || "your_tmdb_api_key";
+const TMDB_API_KEY = process.env.TMDB_API_KEY;
 const TMDB_BASE_URL = "https://api.themoviedb.org/3";
 
 // Middleware to verify JWT token
